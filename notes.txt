@@ -1,0 +1,24 @@
+Veri ve Tarih Bazlı İzin Atama
+Kullanıcıya bir izni sınırlı süre için atamak veya model bazlı yetki vermek:
+
+Özel İzin Atama
+php
+Kodu kopyala
+$user->permissions()->attach($permissionId, [
+    'is_restricted' => false,
+    'start_date' => '2024-01-01',
+    'end_date' => '2024-12-31',
+]);
+Model Bazlı İzin Atama
+php
+Kodu kopyala
+$user->modelPermissions()->create([
+    'model_type' => \App\Models\Hospital::class,
+    'model_id' => 1,
+    'permission_id' => $permissionId,
+]);
+Dinamik ve Esnek Kullanım Özet
+Kullanıcı rol ve izinleri birleştirilerek dinamik bir kontrol sağlanır.
+Trait tüm yetki kontrol mekanizmasını merkezi bir noktaya taşır.
+Zaman, model ve kullanıcı bazlı izinler sıralı bir şekilde kontrol edilir.
+Middleware ile kolay kullanım ve route bazlı erişim kontrolü sağlanır.
